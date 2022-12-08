@@ -46,13 +46,11 @@ BOOK ScanBook(){
 	int year, price;
 
 	printf("author: ");
-	scanf("%s", st);
-	strcpy(book.author, st);
-
+	scanf("%s", book.author);
+	
 	printf("header: ");
-	scanf("%s", st);
-	strcpy(book.header, st);
-
+	scanf("%s", book.header);
+	
 	printf("year of publication: ");
 	scanf("%i", &year);
 	book.year = CheckYear(year);
