@@ -3,4 +3,4 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 
-extern void OldTask();
+extern void ThirdTask();

@@ -3,11 +3,11 @@
 using namespace std;
 
 void PrintBook(const BOOK& book) {
-	printf("author: %s\n", book.author.c_str());
-	printf("header: %s\n", book.header.c_str());
+	printf("author: %s\n", book.author);
+	printf("header: %s\n", book.header);
 	printf("year of publication: %i\n", book.year);
 	printf("price: %i\n", book.price);
-	printf("category: %s\n", book.category.c_str());
+	printf("category: %s\n", book.category);
 }
 
 int CheckYear(int year) {
@@ -25,11 +25,11 @@ int CheckPrice(int price) {
 	return 100;
 }
 
-string CheckCategory(char* category) {
-	string list[4] = { "fantasy", "manga", "classic", "roman" };
+char * CheckCategory(char* category) {
+	char list[4][100] = {"fantasy", "manga", "classic", "roman"};
 	while (true){
 		for (int i = 0; i < 4; i++){
-			if (!list[i].compare(category)){
+			if (strcmp(list[i], category) == 0){
 				return category;
 			}
 		}
@@ -42,17 +42,16 @@ string CheckCategory(char* category) {
 BOOK ScanBook(){
 	
 	BOOK book;
-	char st[100] = {0};
+	char st[BUFFER_LENTGH] = {0};
 	int year, price;
-	string category;
 
 	printf("author: ");
 	scanf("%s", st);
-	book.author = st;
+	strcpy(book.author, st);
 
 	printf("header: ");
 	scanf("%s", st);
-	book.header = st;
+	strcpy(book.header, st);
 
 	printf("year of publication: ");
 	scanf("%i", &year);
@@ -64,7 +63,7 @@ BOOK ScanBook(){
 	
 	printf("Choose category from list: fantasy, manga, classic, roman\n");
 	scanf("%s", st);
-	book.category = CheckCategory(st);
+	strcpy(book.category, CheckCategory(st));
 	
 	return book;
 }
@@ -88,4 +87,5 @@ void BookTask() {
 	PrintBook(*bookdynamic);
 
 	BOOK bookTest = ScanBook();
+	PrintBook(bookTest);
 }

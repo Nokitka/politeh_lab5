@@ -17,5 +17,5 @@ int main() {
 
 	//ThirdTask();
 
-	//BookTask();
+	BookTask();
 }
