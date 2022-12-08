@@ -26,7 +26,7 @@ int CheckPrice(int price) {
 }
 
 char * CheckCategory(char* category) {
-	char list[4][100] = {"fantasy", "manga", "classic", "roman"};
+	char list[4][BUFFER_SIZE] = {"fantasy", "manga", "classic", "roman"};
 	while (true){
 		for (int i = 0; i < 4; i++){
 			if (strcmp(list[i], category) == 0){
@@ -42,7 +42,7 @@ char * CheckCategory(char* category) {
 BOOK ScanBook(){
 	
 	BOOK book;
-	char st[BUFFER_LENTGH] = {0};
+	char st[BUFFER_SIZE] = {0};
 	int year, price;
 
 	printf("author: ");

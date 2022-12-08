@@ -5,15 +5,15 @@
 
 using namespace std;
 
-#define BUFFER_LENTGH 100
+#define BUFFER_SIZE 100
 
 struct BOOK
 {
-	char author[BUFFER_LENTGH];
-	char header[BUFFER_LENTGH];
+	char author[BUFFER_SIZE];
+	char header[BUFFER_SIZE];
 	int year;
 	int price;
-	char category[BUFFER_LENTGH];
+	char category[BUFFER_SIZE];
 };
 
 extern void BookTask();
