@@ -1,13 +1,28 @@
 ﻿#include "booktask.h"
 
-using namespace std;
+void MyScanf(char **buffer, int sizeOfBuffer) {
+	*buffer = (char *)malloc(sizeof(char) * sizeOfBuffer);
 
-void PrintBook(const BOOK& book) {
-	printf("author: %s\n", book.author);
-	printf("header: %s\n", book.header);
-	printf("year of publication: %i\n", book.year);
-	printf("price: %i\n", book.price);
-	printf("category: %s\n", book.category);
+	if (buffer == nullptr)
+		return;
+
+	char sym;
+	int cnt = 0;
+	while ((sym = _getch()) && sym != 13 && sym != 27 && cnt < sizeOfBuffer) {
+		printf("%c", sym);
+		(*buffer)[cnt++] = sym;
+	}
+	while (cnt < sizeOfBuffer)
+		(*buffer)[cnt++] = 0;
+	printf("\n");
+}
+
+void PrintBook(const BOOK& printingBook) {
+	printf("author: %s\n", printingBook.author);
+	printf("header: %s\n", printingBook.header);
+	printf("year of publication: %i\n", printingBook.year);
+	printf("price: %i\n", printingBook.price);
+	printf("category: %s\n", printingBook.category);
 }
 
 int CheckYear(int year) {
@@ -25,51 +40,60 @@ int CheckPrice(int price) {
 	return 100;
 }
 
-char * CheckCategory(char* category) {
-	char list[4][BUFFER_SIZE] = {"fantasy", "manga", "classic", "roman"};
-	while (true){
-		for (int i = 0; i < 4; i++){
-			if (strcmp(list[i], category) == 0){
+char* CheckCategory(char* category) {
+	char list[4][BUFFER_SIZE] = { "fantasy", "manga", "classic", "roman" };
+	while (true) {
+		for (int i = 0; i < 4; i++) {
+			if (strcmp(list[i], category) == 0) {
 				return category;
 			}
 		}
 
 		printf("Sorry, but choose category from list: fantasy, manga, classic, roman:'(\n");
-		scanf("%s", category);
+		char* tmpbuf;
+		MyScanf(&tmpbuf, BUFFER_SIZE);
+		strcpy(category, tmpbuf);
+		free(tmpbuf);
 	}
 }
 
-BOOK ScanBook(){
-	
-	BOOK book;
-	char st[BUFFER_SIZE] = {0};
+BOOK ScanBook() {
+	BOOK newBook;
+	char st[BUFFER_SIZE] = { 0 };
+	char* tmpbuf;
+
 	int year, price;
 
 	printf("author: ");
-	scanf("%s", book.author);
-	
+	MyScanf(&tmpbuf, BUFFER_SIZE);
+	strcpy(newBook.author, tmpbuf);
+	free(tmpbuf);
+
 	printf("header: ");
-	scanf("%s", book.header);
-	
+	MyScanf(&tmpbuf, BUFFER_SIZE);
+	strcpy(newBook.header, tmpbuf);
+	free(tmpbuf);
+
 	printf("year of publication: ");
 	scanf("%i", &year);
-	book.year = CheckYear(year);
-	
+	newBook.year = CheckYear(year);
+
 	printf("price: ");
 	scanf("%i", &price);
-	book.price = CheckPrice(price);
-	
+	newBook.price = CheckPrice(price);
+
 	printf("Choose category from list: fantasy, manga, classic, roman\n");
-	scanf("%s", st);
-	strcpy(book.category, CheckCategory(st));
-	
-	return book;
+	MyScanf(&tmpbuf, BUFFER_SIZE);
+	strcpy(st, tmpbuf);
+	free(tmpbuf);
+	strcpy(newBook.category, CheckCategory(st));
+
+	return newBook;
 }
 
 BOOK bookglobal = { "Masashi Kishimoto", "Naruto", 23, 840, "manga" };
 
 void BookTask() {
-
 	BOOK booklocal = { "Masashi Kishimoto", "Naruto", 23, 840, "manga" };
 	static BOOK bookstat = { "Masashi Kishimoto", "Naruto", 23, 840, "manga" };
 	BOOK* bookdynamic = new BOOK{ "Masashi Kishimoto", "Naruto", 23, 840, "manga" };

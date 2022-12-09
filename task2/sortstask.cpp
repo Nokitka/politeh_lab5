@@ -43,12 +43,12 @@ int CmpStr(void* a, void* b) {
 	int flag = 0;
 	int i;
 	
-	for (i = 0; flag == 0 && (*(*a1 + sizeof(char) * i) != 0 || *(*b1 + sizeof(char) * i) != 0); i++)
-		if (*(*a1 + sizeof(char) * i) < *(*b1 + sizeof(char) * i))
+	for (i = 0; flag == 0 && (*(*a1 + i) != 0 || *(*b1 + i) != 0); i++)
+		if (*(*a1 + i) < *(*b1 + i))
 			flag = 1;
-		else if (*(*a1 + sizeof(char) * i) > *(*b1 + sizeof(char) * i))
+		else if (*(*a1 + i) > *(*b1 + i))
 			flag = -1;
-	if (flag && (*(*a1 + sizeof(char) * i) == 0))
+	if (flag && (*(*a1 + i) == 0))
 		flag = 1;
 	return -flag;
 }

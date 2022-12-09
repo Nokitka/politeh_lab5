@@ -1,9 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <Windows.h>
 #include <iostream>
-#include <string>
-
-using namespace std;
+#include <conio.h>
 
 #define BUFFER_SIZE 100
 
@@ -17,3 +14,6 @@ struct BOOK
 };
 
 extern void BookTask();
+extern BOOK ScanBook();
+extern void PrintBook(const BOOK& printingBook);
+extern void MyScanf(char** buffer, int sizeOfBuffer);
