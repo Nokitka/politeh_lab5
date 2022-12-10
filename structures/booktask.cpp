@@ -1,7 +1,7 @@
 ﻿#include "booktask.h"
 
-void MyScanf(char **buffer, int sizeOfBuffer) {
-	*buffer = (char *)malloc(sizeof(char) * sizeOfBuffer);
+void MyScanf(char** buffer, int sizeOfBuffer) {
+	*buffer = (char*)malloc(sizeof(char) * sizeOfBuffer);
 
 	if (buffer == nullptr)
 		return;
@@ -9,8 +9,14 @@ void MyScanf(char **buffer, int sizeOfBuffer) {
 	char sym;
 	int cnt = 0;
 	while ((sym = _getch()) && sym != 13 && sym != 27 && cnt < sizeOfBuffer) {
-		printf("%c", sym);
-		(*buffer)[cnt++] = sym;
+		if (sym == 8) {
+			printf("\b");
+			cnt--;
+		}
+		else {
+			printf("%c", sym);
+			(*buffer)[cnt++] = sym;
+		}
 	}
 	while (cnt < sizeOfBuffer)
 		(*buffer)[cnt++] = 0;
